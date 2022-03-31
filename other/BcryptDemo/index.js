@@ -1,21 +1,19 @@
-const bcrypt = require('bcrypt');
+const express = require('express');
+const app = express();
+const port = 8080;
+const User = require('./models/user');
 
-//option 1
-const hashPassword = async (psswrd) => {
-	const salt = await bcrypt.genSalt(12);
-	const hash = await bcrypt.hash(psswrd, salt);
-	console.log(hash);
-};
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-// option 2
-// bcrypt.hash(PlainTextPassword, saltRounds, () => {
-//     //store password in db
-// });
+app.get('/register', (req, res) => {
+	res.render('register');
+});
 
-const login = async (psswrd, hashedPsswrd) => {
-	const result = await bcrypt.compare(psswrd, hashedPsswrd);
-	result ? console.log('Logged in!') : console.log('Wrong password');
-};
+app.get('/secret', (req, res) => {
+	res.send('secret');
+});
 
-// hashPassword('monkey');
-login('monkey', '$2b$12$g5tl.7KTDzE3QGtFAauB8.dbN9u6LkC5gUxlJUOW9TDC4XjxzMSM.');
+app.listen(port, () => {
+	console.log(`listening on port ${port}...`);
+});
