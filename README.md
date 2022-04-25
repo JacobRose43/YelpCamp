@@ -1,2 +1,2 @@
 # exerciseProject
-YelpCamp project only for practice //udemy - Colt Steele
+YelpCamp project only for practice
